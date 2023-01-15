@@ -29,8 +29,8 @@ public class SkillGroupModel {
     @JoinColumn(name = "id_person")
     private PersonModel person;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "skill", cascade = CascadeType.ALL )
-    List<SkillModel> skillGroup;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "skillgroup", cascade = CascadeType.ALL )
+    List<SkillModel> skill;
     
     
     public SkillGroupModel() {

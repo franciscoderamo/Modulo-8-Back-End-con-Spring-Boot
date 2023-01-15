@@ -1,5 +1,6 @@
 package ar.com.franciscoderamo.portfolio.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -7,36 +8,38 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "skill")
+@Table(name = "services")
 @Getter @Setter
-public class SkillModel {
+public class ServicesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private int porcentage;
-   
-  
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_skill_group")
-    private SkillGroupModel skillgroup;
-    
+    private String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_person")
     private PersonModel person;
-    
-    public SkillModel() {
-    }
 
-    public SkillModel(Long id, String title, int porcentage) {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "services", cascade = CascadeType.ALL )
+    List<TaskModel> task;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "services", cascade = CascadeType.ALL )
+    List<PortfolioModel> portfolio;
+    
+    public ServicesModel() {
+    }
+    
+    
+    public ServicesModel(Long id, String name) {
         this.id = id;
-        this.title = title;
-        this.porcentage = porcentage;
+        this.name = name;
     }
     
     /*    
@@ -47,5 +50,4 @@ public class SkillModel {
     public void setId(Long id) {
         this.id = id;
     } */
-
 }

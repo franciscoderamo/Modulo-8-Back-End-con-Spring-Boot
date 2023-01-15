@@ -12,33 +12,31 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "skill")
+@Table(name = "task")
 @Getter @Setter
-public class SkillModel {
+public class TaskModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private int porcentage;
-   
-  
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_skill_group")
-    private SkillGroupModel skillgroup;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_person")
     private PersonModel person;
     
-    public SkillModel() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_services")
+    private ServicesModel services;
+    
+    
+    public TaskModel() {
     }
 
-    public SkillModel(Long id, String title, int porcentage) {
+    public TaskModel(Long id, String title) {
         this.id = id;
         this.title = title;
-        this.porcentage = porcentage;
-    }
-    
+    } 
+   
     /*    
     public Long getId() {
         return id;

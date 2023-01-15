@@ -18,7 +18,7 @@ import lombok.Setter;
 public class PersonModel {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String resume;
@@ -43,11 +43,19 @@ public class PersonModel {
     List<WorkedModel> worked;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL )
-    List<SkillGroupModel> skillGroup;
+    List<SkillGroupModel> skillgroup;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL )
     List<SkillModel> skill;
     
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL )
+    List<ServicesModel> services;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL )
+    List<TaskModel> task;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL )
+    List<PortfolioModel> portfolio;
     
     public PersonModel () {
     }
